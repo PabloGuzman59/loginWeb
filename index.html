@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .login-container {
+    background: white;
+    padding: 2.5rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 350px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  label {
+    font-weight: 600;
+    color: #555;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    margin-top: 0.3rem;
+    margin-bottom: 1.25rem;
+    border: 1.8px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #357ABD;
+  }
+
+  #message {
+    margin-top: 1rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .error {
+    color: #e74c3c;
+  }
+
+  .success {
+    color: #27ae60;
+  }
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form id="loginForm" novalidate>
+      <label for="username">Usuario:</label>
+      <input type="text" id="username" required autocomplete="username" />
+
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" required autocomplete="current-password" />
+
+      <button type="submit">Ingresar</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+<script>
+  const loginForm = document.getElementById('loginForm');
+  const messageDiv = document.getElementById('message');
+
+  // Usuarios hardcodeados
+  const users = {
+    admin: '1234',
+    pablo: '5984'
+  };
+
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if(users[username] && users[username] === password) {
+      messageDiv.textContent = `¡Bienvenido, ${username}!`;
+      messageDiv.className = 'success';
+      // Aquí puedes hacer más acciones, redirigir, etc.
+    } else {
+      messageDiv.textContent = 'Usuario o contraseña incorrectos.';
+      messageDiv.className = 'error';
+    }
+  });
+</script>
+</body>
+</html>
